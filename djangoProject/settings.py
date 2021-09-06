@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -24,20 +23,21 @@ SECRET_KEY = 'django-insecure-z19kgyd@_9s#*&drrq2^^jttk&3w7s0qa(378ts358s)#0!qz6
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
+# DEBUG = False
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'firstlink.apps.FirstlinkConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'firstlink.apps.FirstlinkConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,17 +71,46 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# ================================================= #
+# ************** mysql/sqlite3 数据库配置  ************** #
+# ================================================= #
+# 数据库类型 MYSQL/SQLITE3
+DATABASE_TYPE = "MYSQL"
+# DATABASE_TYPE = "SQLITE3"
+# 数据库地址
+DATABASE_HOST = "127.0.0.1"
+# 数据库端口
+DATABASE_PORT = 3306
+# 数据库用户名
+DATABASE_USER = "root"
+# 数据库密码
+DATABASE_PASSWORD = "root"
+# 数据库名
+DATABASE_NAME = "django_project"
 
+if DATABASE_TYPE == "MYSQL":
+    # mysql数据库
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "HOST": DATABASE_HOST,
+            "PORT": DATABASE_PORT,
+            "USER": DATABASE_USER,
+            "PASSWORD": DATABASE_PASSWORD,
+            "NAME": DATABASE_NAME,
+        }
+    }
+else:
+    # sqlite3 数据库
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -101,20 +130,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

@@ -7,24 +7,25 @@
 
 
 #常用命令
-安装卸载
+更新导出依赖环境
 ```
-pip install django
-pip install django==2.2.2
-pip install upgrade django
-pip uninstall django
+pip freeze > requirements.txt
+```
+安装依赖环境
+```
+pip install -r requiremenets.txt
 ```
 查询当前django版本
 ```
 $ python -m django --version
 ```
-
-CMD当前路径下创建项目
+创建应用
 ```
-$ django-admin startproject Project_name
+$ python manage.py startapp App_name
 ```
 
-启动开发用服务器(默认8000端口)
+
+启动开发用服务器(默认8000端口、带热更新)
 ```
 $ python manage.py runserver
 ```
@@ -37,17 +38,14 @@ ALLOWED_HOSTS = ["*"]
 $ python manage.py runserver 0.0.0.0:8000
 ```
 
-创建应用
-```
-$ python manage.py startapp App_name
-```
+
 ##改变数据库模型只需这三步：
 * 1.编辑 models.py 文件，改变模型。
 * 2.运行 python manage.py makemigrations 为模型的改变生成迁移文件。
 * 3.运行 python manage.py migrate 来应用数据库迁移。
 
 
-创建数据库模型 (按需求编辑APP_name/models.py 文件)
+创建数据库模型 (按需求编辑APP_name/models.py 文件),定义好表名、字段名、字段类型和长度限制等
 
 激活数据库模型 (INSTALLED_APPS 添加应用.apps.class_name，命令会创建0001_initial.py迁移文件)
 ```
@@ -68,7 +66,7 @@ $ python manage.py check
 ```
 
 
-开启命令行直接对表模型进行操作
+开启命令行直接对表模型进行操作(可以使用python shell特定的语法对数据库进行增删改查)
 ```
 $ python manage.py shell
 ```
