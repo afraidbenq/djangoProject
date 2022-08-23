@@ -13,7 +13,7 @@ pip freeze > requirements.txt
 ```
 安装依赖环境
 ```
-pip install -r requiremenets.txt
+pip install -r requirements.txt
 ```
 查询当前django版本
 ```
